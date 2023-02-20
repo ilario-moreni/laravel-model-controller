@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ComicsController as ComicsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [ComicsController::class, 'index'])->name('Comics');
+
+/* Route::get('/', function () {
     $comics = config('comics');
     return view('partials.current_series', compact('comics'));
-});
+})->name('Comics'); */
 
-Route::get('/single/{id}', function ($id) {
+/* Route::get('/single/{id}', function ($id) {
     $comics = config('comics');
     $comic = '';
     foreach($comics as $key => $item){
@@ -29,4 +32,6 @@ Route::get('/single/{id}', function ($id) {
     };
     
     return view('partials.single', compact('comics','comic'));
-})->name('single');
+})->name('single'); */
+
+Route::get('/single/{id}', [ComicsController::class, 'showSingle'])->name('Single');
